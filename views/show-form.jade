@@ -1,0 +1,17 @@
+extend layout
+
+block content
+  form#createform(method='post', action='/create', onsubmit="return validateCreate()")
+
+    label(for='name') Name:
+    input#user(type='text',name='name')
+
+    label(for='email') Email:
+    input#email(type='text',name='email') 
+
+    label(for='tel') Tel No:
+    input#phone(type='text',name='phone') 
+
+    input(type='submit',name='submit',value='Submit')
+
+  script(src="/javascripts/create.js")
