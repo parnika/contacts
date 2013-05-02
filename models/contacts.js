@@ -33,6 +33,11 @@ var contacts = {
   list: function (cb) {
     var query = "SELECT * FROM contacts";
     db.query(query, cb);
+  },
+
+  getNames: function (cb) {
+    var query = "SELECT * FROM contacts";
+    db.query(query, cb);
   }
 
 }
