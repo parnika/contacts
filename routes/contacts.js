@@ -3,11 +3,21 @@
 var contactsModel = require('../models/contacts');
 
 var contacts = {
+  
   list: function (req, res, next) {
     contactsModel.list(function (err, list) {
       req.contact_list = list;
       next(err);
     });
+  },
+
+  details: function(req,res,next){
+    contactsModel.getNames(function (err, list) {
+      //req.contact_list = list;
+      //console.log(list);
+      res.render('details',{title:'details',value:list});
+      });
+    
   },
 
   showform: function (err, res, next) {
@@ -24,7 +34,7 @@ var contacts = {
       email: req.body.email,
       phone: req.body.phone
     };
-   //req.check('email', 'Please enter a valid email').len(6,64).isEmail();
+   
    console.log(data.name);
    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 var filter1 = /^[a-zA-Z0-9]*$/;
@@ -73,7 +83,9 @@ else{
 
   createResponse: function (req, res, next) {
     res.send('contact added');
-  }
+  },
+
+  
 }
 
 module.exports = contacts;
