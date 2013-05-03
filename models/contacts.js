@@ -38,7 +38,14 @@ var contacts = {
   getNames: function (cb) {
     var query = "SELECT * FROM contacts";
     db.query(query, cb);
+  },
+
+  delByName: function(name,cb) {
+    //var req = ['name'];
+    var query = "DELETE FROM contacts where name=?";
+    db.query(query,[name],cb);
   }
+
 
 }
 
