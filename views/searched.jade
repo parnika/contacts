@@ -1,0 +1,13 @@
+  
+
+
+
+extend layout
+
+block content
+  form#createform(method='post', action = '/search')
+
+    label(for='name') Enter the name of the person:
+    input#user(type='text',name='name')
+
+    input(type='submit',name='submit',value='Submit')
