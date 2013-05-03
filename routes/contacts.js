@@ -13,11 +13,24 @@ var contacts = {
 
   details: function(req,res,next){
     contactsModel.getNames(function (err, list) {
-      //req.contact_list = list;
-      //console.log(list);
       res.render('details',{title:'details',value:list});
       });
     
+  },
+
+  deleteRecord: function(req,res,next){
+   var name = req.body.name;
+    console.log('name'+name);
+    contactsModel.delByName(name, function(err,list){
+      //console.log('list:'+list);
+      
+      //console.log('err value:'+err);
+      res.render('deleted',{title:'deleted record',affectedrow:list.affectedRows});
+    });
+  },
+
+  showDeleteForm: function(req,res,next){
+      res.render('deletion',{title:'delete record'});
   },
 
   showform: function (err, res, next) {
@@ -31,12 +44,12 @@ var contacts = {
 
    var data = {
       name: req.body.name,
-      email: req.body.email,
+      email: re.body.email,
       phone: req.body.phone
     };
    
    console.log(data.name);
-   var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 var filter1 = /^[a-zA-Z0-9]*$/;
 var filter2 = /^[\d]*$/;
 

@@ -13,6 +13,11 @@ module.exports = function(app) {
   app.post('/create', contacts.validate, contacts.create, contacts.createResponse, common.error);
 
   app.get('/list', contacts.details);
+//search
+  app.post('/deleted',contacts.deleteRecord);
+
+  app.get('/delete', contacts.showDeleteForm);
+
  
 };
 
