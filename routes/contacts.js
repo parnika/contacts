@@ -22,15 +22,30 @@ var contacts = {
    var name = req.body.name;
     console.log('name'+name);
     contactsModel.delByName(name, function(err,list){
-      //console.log('list:'+list);
-      
-      //console.log('err value:'+err);
-      res.render('deleted',{title:'deleted record',affectedrow:list.affectedRows});
+    res.render('deleted',{title:'deleted record',affectedrow:list.affectedRows});
     });
   },
 
+
+
   showDeleteForm: function(req,res,next){
       res.render('deletion',{title:'delete record'});
+  },
+
+  showSearchForm: function(req,res,next){
+       res.render('searched',{title:'searching'});
+  },
+
+  searchRecord: function(req,res,next){
+    var name= req.body.name;
+      //email: req.body.email;
+      //phone: req.body.phone;
+      console.log('searched name:'+name);
+      contactsModel.by_name(name, function(err,list){
+      //console.log(JSON.stringify(list, null, 2));
+      console.log(JSON.stringify(list));
+        res.render('searchh',{title:'searched record',det:list});
+      });
   },
 
   showform: function (err, res, next) {
