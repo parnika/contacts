@@ -12,7 +12,7 @@ module.exports = function(app) {
 
   app.post('/create', contacts.validate, contacts.create, contacts.createResponse, common.error);
 
-  app.get('/list', contacts.details);
+  app.get('/list', contacts.list, contacts.listResponse);
 
   app.post('/deleted',contacts.deleteRecord);
 

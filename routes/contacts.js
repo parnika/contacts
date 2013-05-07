@@ -6,19 +6,14 @@ var contacts = {
 
   list: function(req, res, next) {
     contactsModel.list(function(err, list) {
-      req.contact_list = list;
+      res.locals.contacts = list;
       next(err);
     });
   },
 
-  details: function(req, res, next) {
-    contactsModel.getNames(function(err, list) {
-      res.render('details', {
-        title: 'details',
-        value: list
-      });
-    });
-
+  listResponse: function (req, res, next) {
+    res.locals.title = 'Contact List';
+    res.render('list');
   },
 
   deleteRecord: function(req, res, next) {
