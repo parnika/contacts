@@ -91,6 +91,7 @@ else{
     // if validation fail set err to indicate error
 
     //next(err);
+    //var asdf;
     res.render('error',{title:'title',asdf:str});
   },
 

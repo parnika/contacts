@@ -1,19 +1,27 @@
+
 function validateCreate() {
   // add your validation code which runs when page is loaded
+  // name - a-zA-Z0-9.
+
+  // email should be valid
+  
+
+  // phone should be numberic
+ //alert('in validate');
   var sEmail = $('#email').val();
   var sName = $('#user').val();
   var sPhone = $('#phone').val();
 
-
-var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+  var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 var filter1 = /^[a-zA-Z0-9]*$/;
 var filter2 = /^[\d]*$/;
 
-if((filter.test(sEmail)) &&  (filter1.test(sName)) && (filter2.test(sPhone)){
+if((filter.test(sEmail)) &&  (filter1.test(sName)) && (filter2.test(sPhone)))
+{
   return true;
 }
 else{
- 
+  
  if ((filter.test(sEmail)) == false) 
       alert('enter valid email id');
      
@@ -23,8 +31,9 @@ else{
  if((filter2.test(sPhone)) == false)
       alert('enter valid phone number');
    return false;
-}
-
+  
+    }
+    //return true;
 }
 
 
