@@ -1,85 +1,78 @@
 'use strict';
 
-var request = require('request');
-
-/* server = 'http://localhost:4120/v1/orders/';
-
-var fetch = {
-  init: function (req, cb) {
-    var options = {
-      method: 'get',
-      url: server + req.id
-    };
-    request(options, function (err, resp, body) {
-      cb(err, body);
-    });
-  }
-};
-
-module.exports = fetch;
-
-if (require.main === module) {
-  (function () {
-    var req = {
-      id: process.argv[2] || 1
-    };
-    fetch.init(req, function (err, res) {
-      console.log(err || res);
-    });
-  })();
-}*/
-module.exports = create;
 /*
-server = 'http://localhost:3000/new/';
-var fetch = {
-  init: function (req, cb) {
-    var options = {
-      method: 'get',
-      url: server + req.id
-    };console.log('here');
-    request(options, function (err, resp) {
-      cb(err, body);
-    });
-  }
-};
+var http = require('http');
+var https = require('https');
 
-console.log('in test file');
-if (require.main === module) {
-  (function () {
-    var newcontact = {
-      name: 'neha',
-      email: 'neha@gmail.com',
-      phone: '7875363547'
-    };
-    contacts.create(newcontact, function (err, res) {
-      if (!err && res) {
-        var id = res.insertId;
-        contacts.get(id, function (err, contact) {
-          console.log(err || contact);
-          contacts.list(function (err, result) {
-            console.log(err || result);
-            process.exit(1);
-          });          
-        });
-      } else { 
-        console.log(err || new Error('no response received'));
-      }
+
+function random(response) {
+  console.log("Request handler 'random was called.");
+  response.writeHead(200, {"Content-Type": "application/json"});
+  var otherArray = ["item1", "item2"];
+  var otherObject = { item1: "mainsha", item2: "mani@tim.com" };
+  response.write(
+    JSON.stringify({ 
+      anObject: otherObject, 
+      anArray: otherArray, 
+      another: "item",
     })
-  })();
+  );
+  response.end();
 }*/
-server = 'http://localhost:3000/new/';
-var fetch = {
-  init: function (req, cb) {
-    var options = {
-      method: 'get',
-      url: server + req.id
-    };console.log('here');
-  //request(options, function (err, resp) {
-   // cb(err, body);
-  //});
+
+var querystring = require('querystring');
+var http = require('http');
+var fs = require('fs');
+
+function PostCode(codestring) {
+  // Build the post string from an url.resolveObject(source, relative);ect
+  var post_data = querystring.stringify({
+     'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
+      'output_format': 'json',
+      'output_info': 'compiled_code',
+        'warning_level' : 'QUIET',
+        'js_code' : codestring
+  });
+
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: 'localhost',
+      port: '3000',
+      path: '/create',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': post_data.length
+      }
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+      console.log('Response: ' + chunk);
+      });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end();
+
+}
+
+
+exports.testSomethingElse = function(test){
+
+  fs.readFile('contacts.js', 'utf-8', function (err, data) {
+  console.log('data:'+data);
+  // Make sure there's data before we post it
+  if(data) {
+    PostCode(data);
   }
+  else {
+    console.log("No data to post");
+    process.exit(-1);
+  }
+});
+    test.done();
 };
-
-
-
-
